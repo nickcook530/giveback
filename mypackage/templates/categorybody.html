@@ -1,0 +1,19 @@
+{% for company in companies %}
+    <div class="container">
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">{{ company.name }}</div>
+        <div class="panel-body">
+          <p>Product description: {{ company.product_description }}</p>
+        </div>
+        <div class="panel-body">
+          <p>How they give back: {{ company.cause_description }}</p>
+        </div>
+        <!-- List group -->
+        <ul class="list-group">
+          <li class="list-group-item">HODLER1</li>
+          <li class="list-group-item">HOLDER2</li>
+        </ul>
+      </div>
+    </div>
+{% endfor %}
