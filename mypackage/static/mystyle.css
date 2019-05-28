@@ -6,3 +6,7 @@
 .category-specific {
 	padding-bottom: 20px;
 }
+
+.dropdown-menu li:hover {
+	cursor: pointer;
+}
