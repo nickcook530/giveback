@@ -37,6 +37,19 @@ class Company(db.Model):
             return True
         else:
             return False
+    
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'name': self.name,
+            'image_url': self.image_url,
+            'website_url': self.website_url,
+            'product_description': self.product_description,
+            'cause_url': self.cause_url,
+            'cause_description': self.cause_description,
+            'categories': 'INPUT url_for of API'
+        }
+        return data
 
 class Category(db.Model):
     __tablename__ = 'category'
@@ -45,4 +58,13 @@ class Category(db.Model):
     parent_id = db.Column(db.String(5), index=True) #set to 0 if top level parent, otherwise set to id of parent
 
     def __repr__(self):
-        return '<Category: {}>'.format(self.name) 
+        return '<Category: {}>'.format(self.name)
+    
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'name': self.name,
+            'parent_id': self.parent_id,
+            'companies': 'INPUT url_for of API'
+        }
+        return data

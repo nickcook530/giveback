@@ -1,12 +1,12 @@
 <div class="container text-center">
   <div class="row">
     <div class="category-specific">
-      <h1>{{ selected_category }}</h1>
+      <h1>{{ category }}</h1>
 
       <div id="sub-cat-btn-group" class="btn-group" role="group" aria-label="...">
         <button type="button" class="btn btn-info active" data="INSERTURLHERE">All</button>
         {% for sub_category in sub_categories %}
-        <button type="button" class="btn btn-info sub-btn" data="{{ url_for('category_sub_filter', selected_sub_category=sub_category.name) }}">{{ sub_category.name }}</button>
+        <button type="button" class="btn btn-info sub-btn" data="{{ url_for('get_sub_category_companies', sub_category=sub_category.name) }}">{{ sub_category.name }}</button>
         {% endfor %}
       </div>
     </div>

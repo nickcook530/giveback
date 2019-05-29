@@ -2,6 +2,7 @@ from flask import render_template, redirect, jsonify, url_for, flash
 from mypackage import app, db
 from mypackage.models import Company, Category
 from mypackage.forms import CompanyForm, CategoryForm, LinkForm, UnlinkForm
+import requests
 
 @app.route('/')
 @app.route('/index')
@@ -9,22 +10,34 @@ def index():
     categories = Category.query.filter_by(parent_id='0').all()
     return render_template('base.html', categories=categories)
 
-@app.route('/fullcategory/<selected_category>', methods=['POST'])
-def category_filter(selected_category):
+@app.route('/categories/<category>')
+def category_filter(category):
+    response = requests.get(url_for('get_category_info', category=category, _external=True))
+    return "hi nick"
+ 
+
+#API's
+@app.route('/api/categories/<category>/blah', methods=['POST','GET'])
+def get_category_info(category):
     #categories = Category.query.filter_by(parent_id='0').all()
-    selected_id = Category.query.filter_by(name=selected_category).first().id
+    selected_id = Category.query.filter_by(name=category).first().id
     sub_categories = Category.query.filter_by(parent_id=str(selected_id)).all()
-    companies = Category.query.filter_by(name=selected_category).first().companies
-    return jsonify({'headerdata': render_template('categoryheader.html', sub_categories=sub_categories, selected_category=selected_category),
-        'bodydata': render_template('categorybody.html', companies=companies)})
+    companies = Category.query.filter_by(name=category).first().companies
+    print(Category.query.get(1).to_dict())
+    return jsonify(Category.query.get(1).to_dict())
+    #return jsonify({'headerdata': render_template('categoryheader.html', sub_categories=sub_categories, category=category),
+        #'bodydata': render_template('categorybody.html', companies=companies)})
 
-@app.route('/subcategory/<selected_sub_category>', methods=['POST'])
-def category_sub_filter(selected_sub_category):
-    print(selected_sub_category)
-    print(type(selected_sub_category))
-    companies = Category.query.filter_by(name=selected_sub_category).first().companies
-    return jsonify({'bodydata': render_template('categorybody.html', companies=companies)})
+@app.route('/api/categories/<category>/sub_categories', methods=['POST', 'GET'])
+def get_sub_categories(category):
+    parent_id = Category.query.filter_by(name=category).first().id
+    sub_categories = Category.query.filter_by(parent_id=parent_id).all()
+    sub_category_list = []
+    for sub_category in sub_categories:
+        sub_category_list.append(sub_category.to_dict())
+    return jsonify(results=sub_category_list)
 
+#Internal data loader
 @app.route('/dataload', methods=['GET','POST'])
 def dataload():
     if not app.debug:
