@@ -50,6 +50,7 @@ class Company(db.Model):
             'categories': 'INPUT url_for of API'
         }
         return data
+    
 
 class Category(db.Model):
     __tablename__ = 'category'

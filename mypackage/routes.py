@@ -14,30 +14,37 @@ def index():
 def category_filter(category):
     response = requests.get(url_for('get_category_info', category=category, _external=True))
     return "hi nick"
- 
 
-#API's
-@app.route('/api/categories/<category>/blah', methods=['POST','GET'])
-def get_category_info(category):
-    #categories = Category.query.filter_by(parent_id='0').all()
-    selected_id = Category.query.filter_by(name=category).first().id
-    sub_categories = Category.query.filter_by(parent_id=str(selected_id)).all()
-    companies = Category.query.filter_by(name=category).first().companies
-    print(Category.query.get(1).to_dict())
-    return jsonify(Category.query.get(1).to_dict())
+
     #return jsonify({'headerdata': render_template('categoryheader.html', sub_categories=sub_categories, category=category),
         #'bodydata': render_template('categorybody.html', companies=companies)})
 
-@app.route('/api/categories/<category>/sub_categories', methods=['POST', 'GET'])
+################ API's ##############################
+def query_to_dict_list(query_object_list):
+    dict_list = []
+    for query_object in query_object_list:
+        dict_list.append(query_object.to_dict())
+    return dict_list
+
+@app.route('/api/categories/parents', methods=['GET'])
+def get_parent_categories():
+    category_objects = Category.query.filter_by(parent_id=0).all()
+    categories = query_to_dict_list(category_objects)
+    return jsonify(results=categories)
+
+@app.route('/api/categories/<category>/sub_categories', methods=['GET'])
 def get_sub_categories(category):
     parent_id = Category.query.filter_by(name=category).first().id
-    sub_categories = Category.query.filter_by(parent_id=parent_id).all()
-    sub_category_list = []
-    for sub_category in sub_categories:
-        sub_category_list.append(sub_category.to_dict())
-    return jsonify(results=sub_category_list)
+    sub_category_objects = Category.query.filter_by(parent_id=parent_id).all()
+    sub_categories = query_to_dict_list(sub_category_objects)
+    return jsonify(results=sub_categories)
 
-#Internal data loader
+@app.route('/api/categories/companies', methods=['GET'])
+def get_category_companies(category):
+    
+    return "testing companies"
+
+############# Internal data loader ###################
 @app.route('/dataload', methods=['GET','POST'])
 def dataload():
     if not app.debug:
