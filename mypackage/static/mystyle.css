@@ -1,3 +1,8 @@
+.panel-heading {
+	font-size: 20px;
+	font-weight: bold;
+}
+
 .jumbo-content {
 	width: 75%;
 	padding-left: 20px;

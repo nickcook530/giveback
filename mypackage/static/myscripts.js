@@ -1,20 +1,23 @@
 $(document).ready(function() {
 
-    $("#primary-cat-btn").click(function(){
-        var url_name = $('#primary-cat-btn').attr('data');
+    $(".primary-cat-btn").click(function(){
+        var url_name = $(this).attr("data");
+        console.log(url_name)
         $.ajax({
          url: url_name,
-         type: "POST",
+         type: "GET",
          success: function(resp){
             $('#category-header').empty().append(resp.headerdata);
             $('#category-body').empty().append(resp.bodydata);
         	}
         });
-        alert(url_name);
+        //alert(url_name);
     }); 
 
 
 });
+
+
 
 $('#ajax-content').on('click', "#sub-cat-btn-group > .btn", function() {
     // Set active button for sub_categories
@@ -22,13 +25,13 @@ $('#ajax-content').on('click', "#sub-cat-btn-group > .btn", function() {
     $(this).addClass("active");
 
     //NEED TO ADD FUNCTIONALITY FOR ALL BUTTON
-    var url_name = $('#sub-cat-btn-group > .sub-btn').attr('data');
+    var url_name = $(this).attr('data');
+    console.log(url_name)
     $.ajax({
      url: url_name,
-     type: "POST",
+     type: "GET",
      success: function(resp){
         $('#category-body').empty().append(resp.bodydata);
     	}
     });
-    alert(url_name);
 });

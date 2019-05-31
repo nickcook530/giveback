@@ -51,6 +51,12 @@ class Company(db.Model):
         }
         return data
     
+    @staticmethod
+    def collection_to_dict(collection):
+        list_of_dict = []
+        for query_object in collection:
+            list_of_dict.append(query_object.to_dict())
+        return list_of_dict
 
 class Category(db.Model):
     __tablename__ = 'category'
@@ -61,6 +67,11 @@ class Category(db.Model):
     def __repr__(self):
         return '<Category: {}>'.format(self.name)
     
+    def related_companies(self):
+        companies = Company.query.join(tags,(tags.c.company_id==Company.id)).filter(tags.c.category_id==self.id).all()
+        return companies
+    
+    
     def to_dict(self):
         data = {
             'id': self.id,
@@ -69,3 +80,10 @@ class Category(db.Model):
             'companies': 'INPUT url_for of API'
         }
         return data
+
+    @staticmethod
+    def collection_to_dict(collection):
+        list_of_dict = []
+        for query_object in collection:
+            list_of_dict.append(query_object.to_dict())
+        return list_of_dict

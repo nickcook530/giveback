@@ -4,16 +4,13 @@
         <!-- Default panel contents -->
         <div class="panel-heading">{{ company.name }}</div>
         <div class="panel-body">
-          <p>Product description: {{ company.product_description }}</p>
+          <p><b>Product description:</b> {{ company.product_description }}</p>
+          <p><a href={{ company.website_url }} target="_blank">Click here to start shopping</a></p>
         </div>
         <div class="panel-body">
-          <p>How they give back: {{ company.cause_description }}</p>
+          <p><b>How they give back:</b> {{ company.cause_description }}</p>
+          <p><a href={{ company.cause_url }} target="_blank">Click here to learn more</a></p>
         </div>
-        <!-- List group -->
-        <ul class="list-group">
-          <li class="list-group-item">HODLER1</li>
-          <li class="list-group-item">HOLDER2</li>
-        </ul>
       </div>
     </div>
 {% endfor %}

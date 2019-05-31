@@ -11,6 +11,11 @@
     <script src="{{url_for('.static', filename='myscripts.js')}}"></script> 
 {% endblock %}
 
+{% block head %}
+{{super()}}
+<link rel="shortcut icon" href="#" /> <!-- Temporary fix for favicon error -->
+{% endblock %}
+
 {% block title %}Give Back Pact{% endblock %}
 
 
@@ -28,7 +33,6 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Home</a></li>
                     <li><a href="#">Random</a></li>
                 </ul>
                 <!-- <ul class="nav navbar-nav navbar-right">
@@ -54,10 +58,8 @@
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 {% for category in categories %}
-                    <li><a id="primary-cat-btn" data="{{ url_for('get_category_info', category=category.name) }}">{{ category.name }}</a></li>
+                    <li><a class="primary-cat-btn" data="{{ url_for('category_filter', category=category.name) }}">{{ category.name }}</a></li>
                 {% endfor %}
-                <li role="separator" class="divider"></li>
-                <li><a href="#">PLACEHOLDER</a></li>
               </ul>
             </div>
         </div>

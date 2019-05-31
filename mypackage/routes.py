@@ -2,47 +2,46 @@ from flask import render_template, redirect, jsonify, url_for, flash
 from mypackage import app, db
 from mypackage.models import Company, Category
 from mypackage.forms import CompanyForm, CategoryForm, LinkForm, UnlinkForm
-import requests
 
 @app.route('/')
 @app.route('/index')
 def index():
-    categories = Category.query.filter_by(parent_id='0').all()
+    categories = Category.query.filter_by(parent_id=0).all()
     return render_template('base.html', categories=categories)
 
-@app.route('/categories/<category>')
+@app.route('/<category>')
 def category_filter(category):
-    response = requests.get(url_for('get_category_info', category=category, _external=True))
-    return "hi nick"
-
-
-    #return jsonify({'headerdata': render_template('categoryheader.html', sub_categories=sub_categories, category=category),
-        #'bodydata': render_template('categorybody.html', companies=companies)})
+    category_object = Category.query.filter_by(name=category).first()
+    category_id = category_object.id
+    parent_id = category_object.parent_id
+    companies = category_object.related_companies()
+    sub_categories = Category.query.filter_by(parent_id=category_id).all()
+    if parent_id == "0":
+        return jsonify({'headerdata': render_template('categoryheader.html', sub_categories=sub_categories, category_name=category),
+            'bodydata': render_template('categorybody.html', companies=companies)})
+    else:
+        return jsonify({'bodydata': render_template('categorybody.html', companies=companies)})
 
 ################ API's ##############################
-def query_to_dict_list(query_object_list):
-    dict_list = []
-    for query_object in query_object_list:
-        dict_list.append(query_object.to_dict())
-    return dict_list
-
 @app.route('/api/categories/parents', methods=['GET'])
 def get_parent_categories():
     category_objects = Category.query.filter_by(parent_id=0).all()
-    categories = query_to_dict_list(category_objects)
-    return jsonify(results=categories)
+    categories = Category.collection_to_dict(category_objects)
+    return jsonify(categories)
 
-@app.route('/api/categories/<category>/sub_categories', methods=['GET'])
+@app.route('/api/categories/<category>/sub-categories', methods=['GET'])
 def get_sub_categories(category):
     parent_id = Category.query.filter_by(name=category).first().id
     sub_category_objects = Category.query.filter_by(parent_id=parent_id).all()
-    sub_categories = query_to_dict_list(sub_category_objects)
-    return jsonify(results=sub_categories)
+    sub_categories = Category.collection_to_dict(sub_category_objects)
+    return jsonify(sub_categories)
 
-@app.route('/api/categories/companies', methods=['GET'])
+@app.route('/api/categories/<category>/companies', methods=['GET'])
 def get_category_companies(category):
-    
-    return "testing companies"
+    category_object = Category.query.filter_by(name=category).first()
+    company_objects = category_object.related_companies()
+    companies = Company.collection_to_dict(company_objects)
+    return jsonify(companies)
 
 ############# Internal data loader ###################
 @app.route('/dataload', methods=['GET','POST'])
