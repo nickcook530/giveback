@@ -62,7 +62,7 @@ class Category(db.Model):
     __tablename__ = 'category'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), index=True, unique=True)
-    parent_id = db.Column(db.String(5), index=True) #set to 0 if top level parent, otherwise set to id of parent
+    parent_id = db.Column(db.Integer, index=True) #set to 0 if top level parent, otherwise set to id of parent
 
     def __repr__(self):
         return '<Category: {}>'.format(self.name)

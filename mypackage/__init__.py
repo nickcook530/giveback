@@ -10,7 +10,7 @@ app.config.from_object(Config)
 
 #initialize extensions
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+migrate = Migrate(app, db, compare_type=True) #compare_type=true picks up on column type changes
 bootstrap = Bootstrap(app)
 
 #imports at bottom to avoid circular imports

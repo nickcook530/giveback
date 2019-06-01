@@ -1,8 +1,8 @@
-"""moved to aws ec2 instance for dev
+"""parent_id to int
 
-Revision ID: 571911374698
+Revision ID: 0fa19700d542
 Revises: 
-Create Date: 2019-05-27 02:34:14.419065
+Create Date: 2019-06-01 03:16:09.176021
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '571911374698'
+revision = '0fa19700d542'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,11 +21,11 @@ def upgrade():
     op.create_table('category',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=True),
-    sa.Column('parent_id', sa.String(length=5), nullable=True),
+    sa.Column('parent_id', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_category_name'), 'category', ['name'], unique=True)
-    op.create_index(op.f('ix_category_parent_id'), 'category', ['parent_id'], unique=True)
+    op.create_index(op.f('ix_category_parent_id'), 'category', ['parent_id'], unique=False)
     op.create_table('company',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=True),
