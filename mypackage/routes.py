@@ -6,7 +6,7 @@ from mypackage.forms import CompanyForm, CategoryForm, LinkForm, UnlinkForm
 @app.route('/')
 @app.route('/index')
 def index():
-    categories = Category.query.filter_by(parent_id=0).all()
+    categories = Category.query.filter_by(parent_id='0').all()
     return render_template('base.html', categories=categories)
 
 @app.route('/filter/<category>')
@@ -25,7 +25,7 @@ def category_filter(category):
 ################ API's ##############################
 @app.route('/api/categories/parents', methods=['GET'])
 def get_parent_categories():
-    category_objects = Category.query.filter_by(parent_id=0).all()
+    category_objects = Category.query.filter_by(parent_id='0').all()
     categories = Category.collection_to_dict(category_objects)
     return jsonify(categories)
 
