@@ -9,7 +9,7 @@ def index():
     categories = Category.query.filter_by(parent_id=0).all()
     return render_template('base.html', categories=categories)
 
-@app.route('/<category>')
+@app.route('/filter/<category>')
 def category_filter(category):
     category_object = Category.query.filter_by(name=category).first()
     category_id = category_object.id
