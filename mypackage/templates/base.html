@@ -31,15 +31,14 @@
                 </button>
                 <a class="navbar-brand" href="{{ url_for('index') }}">Give Back Pact</a>
             </div>
-            <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                  <ul class="nav navbar-nav">
-                    <li><a href="#">Random</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a id="random-company" data="{{ url_for('random_company') }}">Random Company</a></li>
                 </ul> 
-            </div> -->
+                <!-- <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">About Us</a></li>
+                </ul> -->
+            </div>
         </div>
     </nav>
 {% endblock %}

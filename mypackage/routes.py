@@ -2,6 +2,7 @@ from flask import render_template, redirect, jsonify, url_for, flash
 from mypackage import app, db
 from mypackage.models import Company, Category
 from mypackage.forms import CompanyForm, CategoryForm, LinkForm, UnlinkForm
+from random import shuffle
 
 @app.route('/')
 @app.route('/index')
@@ -21,6 +22,14 @@ def category_filter(category):
             'bodydata': render_template('categorybody.html', companies=companies)})
     else:
         return jsonify({'bodydata': render_template('categorybody.html', companies=companies)})
+
+@app.route('/random/company')
+def random_company():
+    companies = Company.query.all()
+    shuffle(companies)
+    company = [companies[0]]
+    return jsonify({'headerdata': render_template('categoryheader.html', category_name="Random Company"),
+            'bodydata': render_template('categorybody.html', companies=company)})
 
 ################ API's (not used internally) #############################
 @app.route('/api/categories/parents', methods=['GET'])

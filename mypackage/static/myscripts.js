@@ -39,3 +39,19 @@ $('#ajax-content').on('click', "#sub-cat-btn-group > .btn", function() {
     	}
     });
 });
+
+$("#random-company").click(function() {
+    $('#category-body').empty()
+    $('#category-header').empty()
+    $(".loading").show();
+    var url_name = $(this).attr('data');
+    $.ajax({
+     url: url_name,
+     type: "GET",
+     success: function(resp){
+        $(".loading").hide();
+        $('#category-header').empty().append(resp.headerdata);
+        $('#category-body').empty().append(resp.bodydata);
+    	}
+    });
+});

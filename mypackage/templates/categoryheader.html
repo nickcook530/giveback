@@ -2,13 +2,14 @@
   <div class="row">
     <div class="category-specific">
       <h1>{{ category_name }}</h1>
-
+      {% if sub_categories %}
       <div id="sub-cat-btn-group" class="btn-group" role="group" aria-label="...">
         <button type="button" class="btn btn-info active" data="{{ url_for('category_filter', category=category_name) }}">All</button>
         {% for sub_category in sub_categories %}
         <button type="button" class="btn btn-info sub-btn" data="{{ url_for('category_filter', category=sub_category.name) }}">{{ sub_category.name }}</button>
         {% endfor %}
       </div>
+      {% endif %}
     </div>
   </div>
 </div>

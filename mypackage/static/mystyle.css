@@ -1,3 +1,7 @@
+.navbar-nav li:hover {
+	cursor: pointer;
+}
+
 .panel-heading {
 	font-size: 20px;
 	font-weight: bold;
