@@ -12,8 +12,8 @@ def index():
 @app.route('/filter/<category>')
 def category_filter(category):
     category_object = Category.query.filter_by(name=category).first()
-    category_id = category_object.id #returns int
-    parent_id = category_object.parent_id #returns string
+    category_id = category_object.id 
+    parent_id = category_object.parent_id 
     companies = category_object.related_companies()
     sub_categories = Category.query.filter_by(parent_id=category_id).all()
     if parent_id == 0:
@@ -22,7 +22,7 @@ def category_filter(category):
     else:
         return jsonify({'bodydata': render_template('categorybody.html', companies=companies)})
 
-################ API's #############################
+################ API's (not used internally) #############################
 @app.route('/api/categories/parents', methods=['GET'])
 def get_parent_categories():
     category_objects = Category.query.filter_by(parent_id=0).all()

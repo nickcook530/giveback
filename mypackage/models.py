@@ -68,7 +68,7 @@ class Category(db.Model):
         return '<Category: {}>'.format(self.name)
     
     def related_companies(self):
-        companies = Company.query.join(tags,(tags.c.company_id==Company.id)).filter(tags.c.category_id==self.id).all()
+        companies = Company.query.join(tags,(tags.c.company_id==Company.id)).order_by(Company.name).filter(tags.c.category_id==self.id).all()
         return companies
     
     
