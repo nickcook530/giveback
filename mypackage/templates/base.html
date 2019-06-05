@@ -29,7 +29,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url_for('index') }}">Give Back Pact</a>
+                <a class="navbar-brand" href="{{ url_for('index') }}"><b>Give Back Pact</b></a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                  <ul class="nav navbar-nav">
@@ -51,11 +51,14 @@
           <p>Before you make your next purchase consider spending money at a company where your dollar doesn't stop in their bank account. Every company featured on this site gives back to society with each purchase. Buy great goods and support the greater good at the same time!</p>
           <p>
             <div class="dropdown">
-              <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <button class="btn btn-lg dropdown-toggle" type="button" id="parent-category-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 What are you looking for?
                 <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <span class="loading" >
+                    <img src="{{ url_for('static', filename='loading.gif') }}">
+                </span>
+              <ul class="dropdown-menu" aria-labelledby="parent-category-dropdown">
                 {% for category in categories %}
                     <li><a class="primary-cat-btn" data="{{ url_for('category_filter', category=category.name) }}">{{ category.name }}</a></li>
                 {% endfor %}
@@ -63,16 +66,14 @@
             </div>
         </div>
     </div>
-    
+
     <div id="ajax-content">
         <div id="category-header">
         </div>
         <div id="category-body">
         </div>
     </div>
-    <div class="loading" >
-        <img src="{{ url_for('static', filename='loading.gif') }}">
-    </div>
+ 
     {% block app_content %}
     {% endblock %}
 

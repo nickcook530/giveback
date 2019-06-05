@@ -1,10 +1,9 @@
-.navbar-nav li:hover {
-	cursor: pointer;
+.navbar-default .navbar-brand {
+	color: #88D0AB;
 }
 
-.panel-heading {
-	font-size: 20px;
-	font-weight: bold;
+.navbar-nav li:hover {
+	cursor: pointer;
 }
 
 .jumbo-content {
@@ -16,17 +15,33 @@
 	padding-bottom: 20px;
 }
 
+#parent-category-dropdown {
+	background-color: #88D0AB;
+}
+
 .dropdown-menu li:hover {
 	cursor: pointer;
 }
 
-.loading > img {
-	width: 30px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .primary-cat-btn {
 	font-size: 1.3em;
+}
+
+.loading {
+	display: inline-block;
+}
+
+#sub-cat-btn-group button {
+	background-color: #88D0AB;
+	border-color: #E9E6E8;
+	outline-color: #bab8b9;
+}
+
+#sub-cat-btn-group button.active {
+	box-shadow: inset 0 3px 5px rgba(0,0,0,.4) ;
+}
+
+.panel-heading {
+	font-size: 20px;
+	font-weight: bold;
 }
