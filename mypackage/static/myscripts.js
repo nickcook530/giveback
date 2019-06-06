@@ -44,6 +44,7 @@ $("#random-company").click(function() {
      url: url_name,
      type: "GET",
      success: function(resp){
+        $('.collapse').collapse('hide')
         $(".loading").hide();
         $('#category-header').empty().append(resp.headerdata);
         $('#category-body').empty().append(resp.bodydata);
