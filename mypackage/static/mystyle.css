@@ -1,14 +1,17 @@
+html, body {
+	height: 100vh;
+}
+
+#footer {
+	margin: 0px;
+}
+
 .navbar-default .navbar-brand {
 	color: #88D0AB;
 }
 
 .navbar-nav li:hover {
 	cursor: pointer;
-}
-
-.jumbo-content {
-	width: 75%;
-	padding-left: 20px;
 }
 
 .category-specific {
@@ -42,6 +45,7 @@
 }
 
 .panel-heading {
-	font-size: 20px;
+	font-size: 1.8em;
 	font-weight: bold;
 }
+

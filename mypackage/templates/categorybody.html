@@ -2,9 +2,9 @@
     <div class="container">
       <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading">{{ company.name }}</div>
+        <div class="panel-heading"><a href={{ company.website_url }} target="_blank">{{ company.name }}</a></div>
         <div class="panel-body">
-          <p><b>Product description:</b> {{ company.product_description }}</p>
+          <p><b>What they sell:</b> {{ company.product_description }}</p>
           <p><a href={{ company.website_url }} target="_blank">Click here to start shopping</a></p>
         </div>
         <div class="panel-body">
@@ -13,4 +13,11 @@
         </div>
       </div>
     </div>
+    
 {% endfor %}
+
+<div id="footer" class="navbar navbar-default">
+  <div class="container">
+      <p class="navbar-text pull-left">&copy; Copyright 2019, Give Back Pact</p>
+  </div>
+</div>
