@@ -1,11 +1,3 @@
-html, body {
-	height: 100vh;
-}
-
-#footer {
-	margin: 0px;
-}
-
 .navbar-default .navbar-brand {
 	color: #88D0AB;
 }
@@ -49,3 +41,11 @@ html, body {
 	font-weight: bold;
 }
 
+#ajax-content {
+	padding-bottom: 50px;
+	min-height: 25vh; /* work around to fix footer positioning, needs improvement */
+}
+
+#footer {
+	margin-bottom: 0;
+}

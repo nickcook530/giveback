@@ -1,5 +1,11 @@
 $(document).ready(function() {
 
+    var isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+    if (isMobile) {
+        $('#footer').removeClass("navbar-fixed-bottom")
+        }
+
     $(".loading").hide();
     
     $(".primary-cat-btn").click(function(){
@@ -14,7 +20,7 @@ $(document).ready(function() {
             $('#category-body').empty().append(resp.bodydata);
         	}
         });
-    }); 
+    });
 
 });
 
@@ -45,6 +51,7 @@ $("#random-company").click(function() {
      success: function(resp){
         $('.collapse').collapse('hide')
         $(".loading").hide();
+        
         $('#category-header').empty().append(resp.headerdata);
         $('#category-body').empty().append(resp.bodydata);
     	}

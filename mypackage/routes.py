@@ -7,7 +7,7 @@ from random import shuffle
 @app.route('/')
 @app.route('/index')
 def index():
-    categories = Category.query.filter_by(parent_id=0).all()
+    categories = Category.query.filter_by(parent_id=0).order_by(Category.name).all()
     return render_template('base.html', categories=categories)
 
 @app.route('/filter/<category>')
