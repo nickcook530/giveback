@@ -4,12 +4,21 @@
         <!-- Default panel contents -->
         <div class="panel-heading"><a href={{ company.website_url }} target="_blank">{{ company.name }}</a></div>
         <div class="panel-body">
-          <p><b>What they sell:</b> {{ company.product_description }}</p>
-          <p><a href={{ company.website_url }} target="_blank">Click here to start shopping</a></p>
-        </div>
-        <div class="panel-body">
-          <p><b>How they give back:</b> {{ company.cause_description }}</p>
-          <p><a href={{ company.cause_url }} target="_blank">Click here to learn more</a></p>
+          <div class="row">
+            <div class="col-md-2 hidden-xs hidden-sm">
+              <img src="{{ url_for('static', filename='/company_images/'+company.name+'.png') }}">
+            </div>
+            <div class="col-md-10">
+              <div class="company-product-info">
+                <p><b>What they sell:</b> {{ company.product_description }}</p>
+                <p class="company-link"><a href={{ company.website_url }} target="_blank">Click here to start shopping</a></p>
+              </div>
+              <div class="company-cause-info">
+                <p><b>How they give back:</b> {{ company.cause_description }}</p>
+                <p class="company-link"><a href={{ company.cause_url }} target="_blank">Click here to learn more</a></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

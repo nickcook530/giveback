@@ -1,150 +1,81 @@
-<!DOCTYPE html>
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-<html>
-    
-  <head>
-    <title>Data Loader</title>
-  </head>
+{% block head %}
+{{super()}}
+<link rel="shortcut icon" href="#" /> <!-- Temporary fix for favicon error -->
+{% endblock %}
+
+
+{% block title %}Data Loader{% endblock %}
   
-  <body>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
+{% block content %}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        <hr>
+        {% endif %}
+        {% endwith %}
+        
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-md-4">
+                <h1>Load Company</h1>
+                {{ wtf.quick_form(company_form, button_map={'submit': 'primary'}) }}
+            </div>
+        
+        
+            <div class="col-md-4">
+                <h1>Load Category</h1>
+                {{ wtf.quick_form(category_form, button_map={'submit': 'primary'}) }}
+            </div>
+        </div>
+    </div>
+        
     <hr>
-    {% endif %}
-    {% endwith %}
     
-    <h1>Load Company</h1>
-    <form action="" method="post">
-        {{ company_form.hidden_tag() }}
-        <p>
-            {{ company_form.name.label }}<br>
-            {{ company_form.name(size=32) }}<br>
-            {% for error in company_form.name.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ company_form.image_url.label }}<br>
-            {{ company_form.image_url(size=32) }}<br>
-            {% for error in company_form.image_url.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ company_form.website_url.label }}<br>
-            {{ company_form.website_url(size=32) }}<br>
-            {% for error in company_form.website_url.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ company_form.product_description.label }}<br>
-            {{ company_form.product_description(size=32) }}<br>
-            {% for error in company_form.product_description.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ company_form.cause_url.label }}<br>
-            {{ company_form.cause_url(size=32) }}<br>
-            {% for error in company_form.cause_url.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ company_form.cause_description.label }}<br>
-            {{ company_form.cause_description(size=32) }}<br>
-            {% for error in company_form.cause_description.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ company_form.submit() }}</p>
-    </form>
-    <div>
-        <h1>Load Category</h1>
-        <form action="" method="post">
-            {{ category_form.hidden_tag() }}
-            <p>
-                {{ category_form.name.label }}<br>
-                {{ category_form.name(size=32) }}<br>
-                {% for error in category_form.name.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ category_form.parent_id.label }}<br>
-                {{ category_form.parent_id(size=32) }}<br>
-                {% for error in category_form.parent_id.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>{{ category_form.submit() }}</p>
-        </form>
-    <div>
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-md-4">
+                <h1>Link Company & Category</h1>
+                {{ wtf.quick_form(link_form, button_map={'submit': 'primary'}) }}
+            </div>
+        
+        
+            <div class="col-md-4">
+                <h1>Unlink Company & Category</h1>
+                {{ wtf.quick_form(unlink_form, button_map={'submit': 'primary'}) }}
+            </div>
+        </div>
+    </div>
+    
     <hr>
-        <h1>Link Company & Category</h1>
-        <form action="" method="post">
-            {{ link_form.hidden_tag() }}
-            <p>
-                {{ link_form.company_id.label }}<br>
-                {{ link_form.company_id(size=5) }}<br>
-                {% for error in link_form.company_id.errors %}
-                <span style="color: red;">[{{ error }}]</span>
+    <div class=container>
+        <div class="row">
+            <div class=col-md-4>
+                <h1>Existing Companies</h1>
+                    {% for company in company_list %}
+                    <ul>
+                        <li>{{ company.id }}: {{ company.name }}</li>
+                    </ul>
+                    {% endfor %}
+            </div>
+            
+            <div class=col-md-4>
+            <h1>Existing Categories</h1>
+            <h4>ID: Category Name (Parent ID)</h4>
+                {% for category in category_list %}
+                <ul>
+                    <li>{{ category.id }}: {{ category.name }} ({{ category.parent_id }})</li>
+                </ul>
                 {% endfor %}
-            </p>
-            <p>
-                {{ link_form.category_id.label }}<br>
-                {{ link_form.category_id(size=5) }}<br>
-                {% for error in link_form.category_id.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>{{ link_form.submit() }}</p>
-        </form>
+            </div>
+        </div>
     </div>
-    <div>
-        <h1>Unlink Company & Category</h1>
-        <form action="" method="post">
-            {{ unlink_form.hidden_tag() }}
-            <p>
-                {{ unlink_form.company_id.label }}<br>
-                {{ unlink_form.company_id(size=5) }}<br>
-                {% for error in unlink_form.company_id.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ unlink_form.category_id.label }}<br>
-                {{ unlink_form.category_id(size=5) }}<br>
-                {% for error in unlink_form.category_id.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>{{ unlink_form.submit() }}</p>
-        </form>
-    </div>
-    <hr>
-    <h1>Existing Companies</h1>
-        {% for company in company_list %}
-        <ul>
-            <li>{{ company.id }}: {{ company.name }}</li>
-        </ul>
-        {% endfor %}
-    </div>
-        <div>
-    <h1>Existing Categories</h1>
-    <h4>ID: Category Name (Parent ID)</h4>
-        {% for category in category_list %}
-        <ul>
-            <li>{{ category.id }}: {{ category.name }} ({{ category.parent_id }})</li>
-        </ul>
-        {% endfor %}
-    </div>
-  </body>
-
-</html>
+{% endblock %}

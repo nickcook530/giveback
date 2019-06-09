@@ -28,7 +28,7 @@ def random_company():
     companies = Company.query.all()
     shuffle(companies)
     company = [companies[0]]
-    return jsonify({'headerdata': render_template('categoryheader.html', category_name="Random Company"),
+    return jsonify({'headerdata': render_template('categoryheader.html', category_name="Suggested Company"),
             'bodydata': render_template('categorybody.html', companies=company)})
 
 ################ API's (not used internally) #############################
@@ -101,10 +101,10 @@ def dataload():
             return redirect(url_for('dataload'))
         if company.link_category(category):
             db.session.commit()
-            flash('SUCCESS: Category link to company removed!')
+            flash('SUCCESS: Category link to company added!')
             return redirect(url_for('dataload'))
         else:
-            flash('WARNING: Link did not exist!')
+            flash('WARNING: Link already exists!')
             return redirect(url_for('dataload'))
     
     if unlink_form.validate_on_submit():
