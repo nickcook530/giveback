@@ -1,3 +1,7 @@
+# Custom
+/db_backups
+*.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
