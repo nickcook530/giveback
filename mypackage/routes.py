@@ -37,6 +37,12 @@ def get_parent_categories():
     category_objects = Category.query.filter_by(parent_id=0).all()
     categories = Category.collection_to_dict(category_objects)
     return jsonify(categories)
+    
+@app.route('/api/categories/children', methods=['GET'])
+def get_child_categories():
+    category_objects = Category.query.filter(Category.parent_id!=0).all()
+    categories = Category.collection_to_dict(category_objects)
+    return jsonify(categories)
 
 @app.route('/api/categories/<category>/sub-categories', methods=['GET'])
 def get_sub_categories(category):

@@ -1,8 +1,9 @@
-"""parent_id to int
+"""rebuild db from scratch after accidental delete)
 
-Revision ID: 0fa19700d542
+
+Revision ID: f8c38f2eeb5c
 Revises: 
-Create Date: 2019-06-01 03:16:09.176021
+Create Date: 2019-10-11 02:26:24.931225
 
 """
 from alembic import op
@@ -10,7 +11,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '0fa19700d542'
+revision = 'f8c38f2eeb5c'
 down_revision = None
 branch_labels = None
 depends_on = None

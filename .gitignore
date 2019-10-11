@@ -1,6 +1,7 @@
-# Custom
+# Custom by Nick
 /db_backups
 *.csv
+app.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
