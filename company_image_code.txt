@@ -1,0 +1,5 @@
+CODE FOR COMPANY ADD IMAGE TO COMPANY PANEL:
+            
+            <div class="col-md-2 hidden-xs hidden-sm">
+              <img src="{{ url_for('static', filename='company_images/'+company.name+'.png') }}">
+            </div>
